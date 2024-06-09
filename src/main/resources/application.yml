@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: with-me
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${management.address}
+    password: ENC(eLJ/Us1GUOiQ1iRAhY4W5PouHz2RfDaiC4ctdbZx4ho=)
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://${spring.datasource.connection.host}:${spring.datasource.connection.port}/${spring.datasource.connection.schema}?${spring.datasource.connection.option}
+    username: ENC(sJwAPDpFpCpYliO8CL7vTA==)
+    password: ENC(KE4rra8HZD1EcALaImpUG5IA2JzKyYm8)
+    connection:
+      host: ENC(P+srQ8WFc36tTDGtn8g7MVfT4ro4f2CxQB7mLt1vzk8=)
+      port: ENC(e92pgEpnwJuZNdWXX4cc1g==)
+      schema: ENC(dA27LvTvk/SYxnOspgce/Sh9KVqG1Hvr)
+      option: characterEncoding=UTF-8&serverTimezone=UTC
+    hikari:
+      connection-timeout: 5000
+      idle-timeout: 10000
+      maximum-pool-size: 30
+management:
+  address: ENC(PhaQ3ZLpQWvWcDJxFv5T8c43cYlhcrSqIo715MIi2f0=)
