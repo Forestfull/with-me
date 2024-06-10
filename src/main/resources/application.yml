@@ -28,3 +28,7 @@ spring:
       maximum-pool-size: 30
 management:
   address: ENC(PhaQ3ZLpQWvWcDJxFv5T8c43cYlhcrSqIo715MIi2f0=)
+logging:
+  level:
+    org:
+      mybatis: INFO
