@@ -31,3 +31,6 @@ management:
 mybatis:
   mapper-locations: mapper/*.xml
   type-aliases-package: com.forestfull.mapper
+logging:
+  level:
+    org.mybatis: INFO
