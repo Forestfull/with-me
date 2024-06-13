@@ -20,7 +20,7 @@ spring:
     connection:
       host: ENC(P+srQ8WFc36tTDGtn8g7MVfT4ro4f2CxQB7mLt1vzk8=)
       port: ENC(e92pgEpnwJuZNdWXX4cc1g==)
-      schema: ENC(dA27LvTvk/SYxnOspgce/Sh9KVqG1Hvr)
+      schema: with_me
       option: characterEncoding=UTF-8&serverTimezone=UTC
     hikari:
       connection-timeout: 5000
