@@ -34,3 +34,7 @@ mybatis:
 logging:
   level:
     org.mybatis: INFO
+jwt:
+  secret: ${spring.profiles.active}
+  interval:
+    seconds: 1800
