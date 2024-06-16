@@ -1,5 +1,6 @@
-    package com.forestfull.config;
+package com.forestfull.config;
 
+import com.forestfull.entity.UserEntity;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -19,7 +20,13 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
+
+/**
+ * https://sjh9708.tistory.com/170
+ * 나랑 같은 환경이 있어서 차용함
+ */
 
 @Configuration
 @EnableWebSecurity
@@ -58,26 +65,26 @@ public class SecurityConfig {
         /**
          * Access Token 생성
          *
-         * @param member
+         * @param userEntity
          * @return Access Token String
          */
-        public String createAccessToken(CustomUserInfoDto member) {
-            return createToken(member, accessTokenExpTime);
+        public String createAccessToken(UserEntity userEntity) {
+            return createToken(userEntity, accessTokenExpTime);
         }
 
 
         /**
          * JWT 생성
          *
-         * @param member
+         * @param userEntity
          * @param expireTime
          * @return JWT String
          */
-        private String createToken(CustomUserInfoDto member, long expireTime) {
+        private String createToken(UserEntity userEntity, long expireTime) {
             Claims claims = Jwts.claims();
-            claims.put("memberId", member.getMemberId());
-            claims.put("email", member.getEmail());
-            claims.put("role", member.getRole());
+            claims.put("id", userEntity.getId());
+            claims.put("email", userEntity.getEmail());
+            claims.put("role", userEntity.getRole());
 
             LocalDateTime now = LocalDateTime.now(Clock.systemUTC());
             LocalDateTime tokenValidity = now.plusSeconds(expireTime);
@@ -85,8 +92,8 @@ public class SecurityConfig {
 
             return Jwts.builder()
                     .setClaims(claims)
-                    .setIssuedAt(Date.from(now.toInstant()))
-                    .setExpiration(Date.from(tokenValidity.toInstant()))
+                    .setIssuedAt(Date.from(now.toInstant(ZoneOffset.UTC)))
+                    .setExpiration(Date.from(tokenValidity.toInstant(ZoneOffset.UTC)))
                     .signWith(key, SignatureAlgorithm.HS256)
                     .compact();
         }
@@ -99,7 +106,7 @@ public class SecurityConfig {
          * @return User ID
          */
         public Long getUserId(String token) {
-            return parseClaims(token).get("memberId", Long.class);
+            return parseClaims(token).get("id", Long.class);
         }
 
 

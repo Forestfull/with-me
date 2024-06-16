@@ -1,11 +1,23 @@
 package com.forestfull.entity;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
+@Data
 public class UserEntity implements UserDetails {
+
+    private Long id;
+    private String role;
+    private String email;
+    private String nickName;
+    private String callNumber;
+    private LocalDateTime createdTime;
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
