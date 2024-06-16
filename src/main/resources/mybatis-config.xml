@@ -6,7 +6,7 @@
     </settings>
 
     <typeAliases>
-
+        <typeAlias type="com.forestfull.entity.UserEntity" alias="userEntity"/>
 
     </typeAliases>
 
