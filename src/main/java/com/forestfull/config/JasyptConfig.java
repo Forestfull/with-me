@@ -13,6 +13,7 @@ public class JasyptConfig {
 
     private static class EncryptionSetting {
         public static void main(String[] args) {
+
         }
 
         private static StringEncryptor initEncryptor(String key) {

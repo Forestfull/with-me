@@ -35,6 +35,6 @@ logging:
   level:
     org.mybatis: INFO
 jwt:
-  secret: ${spring.profiles.active}
+  secret: ENC(4tEWevQs4dtdpZ2cKOtN81KNquq0+g0G)
   interval:
-    seconds: 1800
+    days: 7

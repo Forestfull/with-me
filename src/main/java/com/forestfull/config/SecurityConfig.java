@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -55,11 +56,11 @@ public class SecurityConfig {
 
         public JwtUtil(
                 @Value("${jwt.secret}") String secretKey,
-                @Value("${jwt.interval.seconds}") long accessTokenExpTime
+                @Value("${jwt.interval.days}") long accessTokenExpTime
         ) {
-            byte[] keyBytes = Decoders.BASE64.decode(secretKey);
+            byte[] keyBytes = (secretKey + System.currentTimeMillis() + System.currentTimeMillis()).getBytes(StandardCharsets.UTF_8);
             this.key = Keys.hmacShaKeyFor(keyBytes);
-            this.accessTokenExpTime = accessTokenExpTime;
+            this.accessTokenExpTime = 60 * 60 * 24 * accessTokenExpTime;
         }
 
         /**
