@@ -13,6 +13,7 @@ public class UserEntity implements UserDetails {
     private Long id;
     private String role;
     private String email;
+    private String password;
     private String nickName;
     private String callNumber;
     private LocalDateTime createdTime;

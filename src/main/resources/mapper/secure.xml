@@ -2,7 +2,11 @@
 <mapper namespace="com.forestfull.mapper.SecureMapper">
     <select id="getUserEntity" resultType="userEntity">
         SELECT
-            *
+            ue.id
+            , ue.email
+            , ue.password
+            , ue.nick_name
+            , ue.call_number
         FROM
             user_entity ue
         WHERE
