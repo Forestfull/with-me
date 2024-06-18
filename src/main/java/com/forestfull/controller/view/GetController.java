@@ -10,12 +10,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class GetController {
 
-    private final SecureService secureService;
-
-    @GetMapping("/")
-    @ResponseBody
-    String test(){
-        return secureService.test();
-    }
 
 }
