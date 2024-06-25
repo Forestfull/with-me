@@ -1,8 +1,8 @@
 package com.forestfull.config;
 
 import com.forestfull.entity.UserEntity;
+import com.forestfull.service.SecureService;
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
@@ -39,7 +38,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final OAuth2UserService oAuth2UserService;
+    private final SecureService secureService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -67,7 +66,7 @@ public class SecurityConfig {
                             writer.println(body);
                             writer.flush();
                         }))
-                        .userInfoEndpoint(uCon -> uCon.userService(oAuth2UserService))
+                        .userInfoEndpoint(uCon -> uCon.userService(secureService))
                 )
                 .build();
     }
