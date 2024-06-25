@@ -47,7 +47,7 @@ management:
   address: ENC(PhaQ3ZLpQWvWcDJxFv5T8c43cYlhcrSqIo715MIi2f0=)
 mybatis:
   mapper-locations: mapper/*.xml
-  type-aliases-package: com.forestfull.mapper
+  type-aliases-package: com.forestfull.*
 logging:
   level:
     org.mybatis: INFO

@@ -1,6 +1,5 @@
 package com.forestfull.config;
 
-import com.forestfull.service.SecureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,13 +7,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * https://sjh9708.tistory.com/170
@@ -24,14 +28,18 @@ import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final SecureService secureService;
+    private DefaultOAuth2UserService defaultOAuth2UserService;
 
     @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    DefaultOAuth2UserService defaultOAuth2UserService() {
+        return this.defaultOAuth2UserService == null ? new DefaultOAuth2UserService() : this.defaultOAuth2UserService;
     }
 
     @Bean
@@ -55,7 +63,22 @@ public class SecurityConfig {
                             writer.println(body);
                             writer.flush();
                         }))
-                        .userInfoEndpoint(uCon -> uCon.userService(secureService))
+                        .userInfoEndpoint(uCon -> uCon.userService(userRequest -> {
+                            final OAuth2User oAuth2User = this.defaultOAuth2UserService.loadUser(userRequest);
+
+                            // Role generate
+                            List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_ADMIN");
+
+                            // nameAttributeKey
+                            String userNameAttributeName = userRequest.getClientRegistration()
+                                    .getProviderDetails()
+                                    .getUserInfoEndpoint()
+                                    .getUserNameAttributeName();
+
+                            // DB 저장로직이 필요하면 추가
+
+                            return new DefaultOAuth2User(authorities, oAuth2User.getAttributes(), userNameAttributeName);
+                        }))
                 )
                 .build();
     }
