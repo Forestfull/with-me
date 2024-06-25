@@ -10,5 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class GetController {
 
+    @GetMapping("/login")
+    String login(){
+        return "login";
+    }
 
 }

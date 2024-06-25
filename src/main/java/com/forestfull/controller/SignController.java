@@ -4,6 +4,7 @@ import com.forestfull.entity.UserEntity;
 import com.forestfull.service.SecureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ public class SignController {
         Optional<String> optionalToken = secureService.getToken(userEntity);
         return optionalToken.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.badRequest().build());
     }
+
 
 
 }
