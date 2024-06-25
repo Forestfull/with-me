@@ -3,6 +3,7 @@ package com.forestfull.service;
 import com.forestfull.config.SecurityConfig;
 import com.forestfull.entity.UserEntity;
 import com.forestfull.mapper.SecureMapper;
+import com.forestfull.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class SecureService extends DefaultOAuth2UserService {
 
     private final SecureMapper secureMapper;
-    private final SecurityConfig.JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
 
     public Optional<String> getToken(UserEntity entity) {
