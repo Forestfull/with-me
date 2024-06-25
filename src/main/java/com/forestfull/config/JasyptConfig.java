@@ -4,11 +4,12 @@ import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.function.BiConsumer;
 
-@Component
+@Configuration
 public class JasyptConfig {
 
     private static class EncryptionSetting {

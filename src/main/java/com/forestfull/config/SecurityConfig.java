@@ -73,7 +73,6 @@ public class SecurityConfig {
             return createToken(userEntity, accessTokenExpTime);
         }
 
-
         /**
          * JWT 생성
          *

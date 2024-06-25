@@ -21,5 +21,4 @@ public class ErrorHandler {
         return ResponseEntity.internalServerError()
                 .body(Collections.singletonMap("message", e.getMessage()));
     }
-
 }
