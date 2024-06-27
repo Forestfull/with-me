@@ -1,10 +1,9 @@
 package com.forestfull.controller;
 
 import com.forestfull.entity.UserEntity;
-import com.forestfull.service.SecureService;
+import com.forestfull.security.SecureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;

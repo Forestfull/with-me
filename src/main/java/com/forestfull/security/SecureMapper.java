@@ -1,4 +1,4 @@
-package com.forestfull.mapper;
+package com.forestfull.security;
 
 import com.forestfull.entity.UserEntity;
 import org.apache.ibatis.annotations.Mapper;

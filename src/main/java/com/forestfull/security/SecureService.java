@@ -1,7 +1,6 @@
-package com.forestfull.service;
+package com.forestfull.security;
 
 import com.forestfull.entity.UserEntity;
-import com.forestfull.mapper.SecureMapper;
 import com.forestfull.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
