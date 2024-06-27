@@ -14,7 +14,7 @@ public class JasyptConfig {
 
     private static class EncryptionSetting {
         public static void main(String[] args) {
-
+enc.accept("project_vigfoot", "b1dd6ed7ca9d4f3a7547c96593fb1217");
         }
 
         private static StringEncryptor initEncryptor(String key) {
